@@ -39,7 +39,6 @@
                 method : 'POST',
                 body : formData
             }
-            console.log(formData)
             fetch('/crawling', options)
                 .then(response => response.json())
                 .then((json) => {
