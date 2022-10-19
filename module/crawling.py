@@ -20,6 +20,7 @@ def crawl_cartoon(url, series_title):
     webtoonName = result.find("span", {"class", "title"}).parent.get_text().strip().split('\n')
 
     # 현재 디렉토리의 하위 폴더에 이미지를 저장할 폴더 생성
+    os.chdir(os.getcwd() + "/static")
     cwd = os.getcwd()
     files = os.listdir(cwd)
 
