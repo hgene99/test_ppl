@@ -36,7 +36,6 @@ def detection():
         if os.path.exists(path):
             os.remove(path)
         el.save(path)
-    # data.save('./image/' + data.filename)
     ppl_data.save(os.getcwd() + '/static/상품/' + ppl_data.filename)
     detected_image_list = []
     for el in data:
