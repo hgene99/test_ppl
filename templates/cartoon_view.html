@@ -26,6 +26,7 @@
             let detectedImageListString = url.searchParams.get('detected_image_list');
             let detectedImageList = detectedImageListString.split(',');
             let pplData = url.searchParams.get('ppl_data');
+            let itemUrl = url.searchParams.get('item_url');
 
             let popup;
             document.querySelectorAll('img').forEach((el) => {
@@ -34,7 +35,7 @@
                         if (el.id === e) {
                             console.log(el.id)
                             let windowFeatures = "width=500, height=300, top=200, left=200, popup";
-                            popup = window.open(`ppl_view?ppl_data=${pplData}`, 'ppl_pop', windowFeatures);
+                            popup = window.open(`ppl_view?ppl_data=${pplData}&item_url=${itemUrl}`, 'ppl_pop', windowFeatures);
                         }
                     }
                 });

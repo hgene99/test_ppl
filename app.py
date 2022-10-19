@@ -37,6 +37,7 @@ def detection_form():
 def detection():
     data = request.files.getlist('file[]')
     ppl_data = request.files['ppl_file']
+    item_url = request.form['item_url']
     # 이미지 객체검출하는 소스
     for el in data:
         print(el)
@@ -47,7 +48,7 @@ def detection():
     detected_image_list = []
     for el in data:
         detected_image_list.append(el.filename)
-    return jsonify({'code': '200', 'dir_name': dir_name, 'detected_image_list': detected_image_list, 'ppl_data': ppl_data.filename})
+    return jsonify({'code': '200', 'dir_name': dir_name, 'detected_image_list': detected_image_list, 'ppl_data': ppl_data.filename, 'item_url': item_url})
 
 @app.route('/cartoon_view', methods=['GET'])
 def cartoon_view():
@@ -59,7 +60,9 @@ def cartoon_view():
 @app.route('/ppl_view', methods=['GET'])
 def ppl_view():
     ppl_data = request.values.get('ppl_data')
-    return render_template('ppl_view.html', ppl_data = ppl_data)
+    item_url = request.values.get('item_url')
+    print(item_url)
+    return render_template('ppl_view.html', ppl_data = ppl_data, item_url = item_url)
 
 if __name__ == '__main__':
     app.run(debug=True)
