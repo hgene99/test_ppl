@@ -23,28 +23,21 @@ def crawling():
 def detection_form():
     return render_template('detection_form.html')
 
-# @app.route('/detection', methods=['POST'])
-# def detection():
-#     data = request.files.getlist('file[]')
-#     # 이미지 객체검출하는 소스
-#     for el in data:
-#         print(el)
-#         el.save()
-#     # data.save('./image/' + data.filename)
-#     return jsonify({'code': '200'})
-
 @app.route('/detection', methods=['POST'])
 def detection():
     data = request.files.getlist('file[]')
     ppl_data = request.files['ppl_file']
     item_url = request.form['item_url']
     # 이미지 객체검출하는 소스
+    dir_name = '프리드로우/제457화 킹 안드레 (2)'
     for el in data:
         print(el)
-        # el.save()
+        path = '{}/{}/{}/{}'.format(os.getcwd(),'static',dir_name,el.filename)
+        if os.path.exists(path):
+            os.remove(path)
+        el.save(path)
     # data.save('./image/' + data.filename)
     ppl_data.save(os.getcwd() + '/static/상품/' + ppl_data.filename)
-    dir_name = '프리드로우/제457화 킹 안드레 (2)'
     detected_image_list = []
     for el in data:
         detected_image_list.append(el.filename)
