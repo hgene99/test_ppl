@@ -3,15 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h3>CARTOON PAGE</h3>
-    <h4 id="title">{{ dir_name }}</h4>
-    <div id="container">
+<div class="container-fluid p-3 my-3 bg-dark text-white">
+    <h1>Cartoon Page</h1>
+    <p id="title">{{ dir_name }}</p>
+</div>
+    <div id="container" class="container">
         <div id="content">
             <div id="comicViewArea">
                 {% for file in file_list %}
-                    <img src="../static/{{ dir_name }}/{{ file }}" id="{{ file }}" alt="">
+                    {% for detected_image in detected_image_list %}
+                        {% if file == detected_image %}
+                            <img src="../static/상품/{{ file }}" id="{{ file }}" alt="">
+                        {% else %}
+                            <img src="../static/{{ dir_name }}/{{ file }}" id="{{ file }}" alt="">
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </div>
         </div>
@@ -34,7 +50,7 @@
                     for (const e of detectedImageList) {
                         if (el.id === e) {
                             console.log(el.id)
-                            let windowFeatures = "width=500, height=300, top=200, left=200, popup";
+                            let windowFeatures = "width=600, height=500, top=200, left=200, popup";
                             popup = window.open(`ppl_view?ppl_data=${pplData}&item_url=${itemUrl}`, 'ppl_pop', windowFeatures);
                         }
                     }
